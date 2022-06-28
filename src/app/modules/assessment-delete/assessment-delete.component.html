@@ -1,0 +1,62 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2022  Interneuron CIC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+
+<div *ngIf="isModalShown" [config]="{ show: true }" class="modal fade delete-modal" id="deleteModal" tabindex="-1"
+    (onHidden)="onHidden()" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="false" bsModal
+    #deleteModal="bs-modal">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form #deleteForm="ngForm">
+                <div>
+                    <div class="close">
+                        <button type="button" class="close close-btn" aria-label="Close" (click)="hideModal(true)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body" style="margin-top:5px;">
+                    <div class="card" style="margin-bottom:5px">
+                        <div class="card-header">
+                            <h4>Delete Assessment</h4>
+                        </div>
+                        <div class="card-body">
+                            <div [hidden]="reason.valid || reason.pristine" class="alert alert-danger">
+                                Please enter a reason to delete assessment
+                            </div>
+                            <label for="reason">Reason:</label>
+                            <textarea required #reason="ngModel" name="reason" class="form-control" rows="5" cols="50"
+                                [(ngModel)]="reasonForDelete"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" [disabled]="!deleteForm.form.valid" class="btn btn-danger"
+                                (click)="onConfirmDelete($event)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<message-popup [showMessagePopup]="showDeleteConfirmationMessagePopup" [genericMessagePopupVM]="confirmationMessagePopup">
+</message-popup>
+<loading-indicator [showLoadingIndicator]="showFullLoadingIndicator"></loading-indicator>
+<message-popup [showMessagePopup]="showSaveStatusMessagePopup" [genericMessagePopupVM]="saveStatusMessagePopup">
+</message-popup>

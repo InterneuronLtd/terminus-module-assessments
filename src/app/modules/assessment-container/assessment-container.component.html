@@ -1,0 +1,49 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2022  Interneuron CIC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+
+<div class="container assessment-select-container">
+  <div class="row">
+    <div class="col">
+      <div class="btn-group ml-1 mr-1 mt-1">
+        <app-encounter-navigation (encounterChanged)="onEncounterChanged($event)"></app-encounter-navigation>
+      </div>
+      <div class="btn-group ml-1 mr-1 mt-1">
+        <app-assessment-type-selector [assessmentTypes]="assessmentTypes"
+          (assessmentTypeChange)="onAssessmentTypeChanged($event)"></app-assessment-type-selector>
+      </div>
+      <div class="btn-group ml-1 mr-1 mt-1">
+        <app-assessment-type-action [assessmentTypes]="assessmentTypes"
+          (assessmentActionChange)="onAssessmentActionChanged($event)"></app-assessment-type-action>
+        <button class="btn text-white btn-info icon-refresh btn-assessment-refresh"
+          (click)="refreshAssessmentList($event)"></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" *ngIf="showResultList">
+      <app-assessment-results [encounter]="selectedEncounter" [assessmentType]="selectedAssessmentType"
+        [patientIdInContext]="patientIdInContext" (reload)="onReloadResults()" #results>
+      </app-assessment-results>
+    </div>
+  </div>
+</div>

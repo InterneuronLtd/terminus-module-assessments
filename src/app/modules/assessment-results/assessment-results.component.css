@@ -1,0 +1,32 @@
+
+.action-col {
+    background-color: #305597 !important;
+    color: #fefefe !important
+}
+
+.action-col a:link {
+    color: #fefefe !important
+}
+.action-col a:visited {
+    color: #fefefe !important
+}
+.action-col a:hover {
+    color: #fefefe !important
+}
+.action-col a:active {
+    color: #fefefe !important
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #fff;
+  color: #0a0b0d;
+}
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+  background-color: #e9ebf5;
+  color: #0a0b0d;
+}
+.table-bordered {
+    border: 1px outset #fefefe !important
+}

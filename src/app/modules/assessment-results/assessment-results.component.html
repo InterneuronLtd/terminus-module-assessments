@@ -1,0 +1,96 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Terminus
+
+Copyright(C) 2022  Interneuron CIC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+
+<div>
+  <table class="table table-striped table-bordered table-dark table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Recorded By</th>
+        <th>Date Created</th>
+        <th>Assessment Type</th>
+        <th>Assessment Status</th>
+        <th>Task Status</th>
+        <!-- <th>View / Amend</th> -->
+        <th>View / Edit / Delete</th>
+        <!-- <th>History</th> -->
+        <th>Tasks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="assessments === undefined">
+        <td colspan="5">
+          <inline-loading-indicator [showLoadingIndicator]="assessments === undefined"></inline-loading-indicator>
+          Loading...
+        </td>
+      </tr>
+      <tr *ngIf="assessments === null || (assessments && assessments.length === 0)">
+        <td colspan="5"> No results
+        </td>
+      </tr>
+      <ng-container *ngIf="assessments && assessments.length > 0">
+        <tr *ngFor="let assessment of assessments">
+          <td>{{assessment._createdby}}</td>
+          <td>{{assessment._createddate}}</td>
+          <td>{{assessment.assessmenttypename}}</td>
+          <td>{{assessment.status}}</td>
+          <td>     
+            <ng-container *ngIf = "!assessment.canShowTask && !assessment.totaltaskcnt ; else showcomplete">NA
+            </ng-container> 
+            <ng-template #showcomplete>
+              <ng-container *ngIf="assessment.completedtaskcnt === assessment.totaltaskcnt; else showIncomplete">Complete
+              </ng-container>
+            </ng-template> 
+            <ng-template #showIncomplete>
+              <ng-container>Incomplete ({{assessment.completedtaskcnt}}/{{assessment.totaltaskcnt}})</ng-container>
+            </ng-template>       
+           
+          </td>
+          <td class="action-col">
+            <ng-container *ngIf="assessment._recordstatus === 2; else showAction">NA</ng-container>
+            <ng-template #showAction>
+              <ng-container *ngIf="assessment.isdraft == true; else showView">
+                <a href="#" (click)="edit(assessment)"> Edit </a>
+              </ng-container>
+              <ng-template #showView>
+                <a href="#" (click)="view(assessment)">View </a>
+                <!-- <a href="#" (click)="amend(assessment)">Amend</a> -->
+              </ng-template>
+              <ng-container *ngIf="assessment && assessment.sourceofinvocation==='manual'">
+                <a href="#" (click)="delete(assessment)"> / Delete </a>
+              </ng-container>
+            </ng-template>
+          </td>
+          <!-- <td class="action-col">
+            <a href="#" (click)="viewHistory(assessment)" style="display:block">History</a>
+          </td> -->
+          <td class="action-col">
+            <a href="#" (click)="showTasks(assessment)" *ngIf="assessment.canShowTask && assessment._recordstatus !== 2; else showNA">Show Tasks</a>
+            <ng-template #showNA>NA</ng-template>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="displayDelete">
+  <app-assessment-delete [assessment]="assessmentToDelete" [displayDeleteModal]="displayDelete"
+    (close)="onDeleteClose($event)"></app-assessment-delete>
+</div>

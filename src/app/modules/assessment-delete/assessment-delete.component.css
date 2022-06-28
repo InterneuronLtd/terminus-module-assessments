@@ -1,0 +1,40 @@
+
+.delete { text-align: center; font-size: 1rem; border: 1px solid #fff;}
+
+.delete .header-row {
+  font-size: 0.9rem; font-weight: bold;
+}
+.delete-modal {
+    z-index:10000 !important;display:block;background: rgba(255, 255, 255, 0.8);
+}
+.delete-modal .close {
+    position: absolute;top: -4px; right: 0px;z-index:1000;
+}
+.delete-modal .close .close-btn {
+  font-size: 1.8rem !important;
+}
+
+.delete .header-row h4 { font-size: 1rem !important }
+.delete .header-row h5 { font-size: 0.9rem !important }
+
+.delete .sub-header-row {
+  font-size: 0.9rem; 
+  font-weight: bold;
+  color:#fff;
+}
+.delete .sub-header-row h4 { font-size: 1rem !important }
+.delete .sub-header-row h5 { font-size: 0.9rem !important }
+
+
+.delete .age-col {
+  background-color: #fec900;
+  font-weight: 500;
+}
+.delete .severe-col {
+  background-color: red;
+  font-weight: 500;
+}
+.delete .moderate-col {
+  background-color: #fe8700;
+  font-weight: 500;
+}
