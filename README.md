@@ -1,6 +1,4 @@
-# Terminus - Assessments Module v1.3
-
-This project was generated with Angular CLI version 13.
+# Terminus - Assessments Module
 
 Assessment module replace traditional paper based assessments and forms allowing users to enter patient data and answer specific patient related questions. In addition, calculate scores deterred by data entered and repopulate forms where data is already available in the platform. 
 
