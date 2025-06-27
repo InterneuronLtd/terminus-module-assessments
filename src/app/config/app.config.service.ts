@@ -1,7 +1,7 @@
 //BEGIN LICENSE BLOCK 
 //Interneuron Terminus
 
-//Copyright(C) 2023  Interneuron Holdings Ltd
+//Copyright(C) 2025  Interneuron Limited
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { AssessmentsModuleConfig, AssessmentsModuleConfigData } from './app.module.config';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 import { InAppBaseApiService } from '../core/services/in.appbase.service';
 
 @Injectable({
@@ -39,10 +39,9 @@ export class AssessmentsConfigService {
         const jsonFile = './assets/config/assessments_config.json';
 
         return new Promise<boolean>((resolve, reject) => {
-            this.apiBaseService
+            firstValueFrom(this.apiBaseService
             .get(jsonFile)
-            .pipe(takeUntil(this.destroy$))
-            .toPromise()
+            .pipe(takeUntil(this.destroy$)))
                 .then((response: any) => {
                     AssessmentsModuleConfigData.Config = <AssessmentsModuleConfig>response;
                     resolve(true);
